@@ -4,7 +4,11 @@ C_LOOK = Command.define do
   match /^l(?:ook)?\b/
 
   run -> (_args) do
-    current_room = SCARY_ROOM
+    current_room = player.current_room
+
+    if current_room.nil?
+      raise "You are not in any room!"
+    end
 
     Prompt.new current_room.description
   end

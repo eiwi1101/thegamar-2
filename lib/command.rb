@@ -1,5 +1,5 @@
 class Command
-  extend DslBase
+  include DslBase
 
   attributes :name,
              :match,
@@ -28,7 +28,7 @@ class Command
     not_implemented if run.nil?
 
     matches = match.match(input)
-    arguments = [matches.names, matches.captures].transpose
+    arguments = [matches.names, matches.captures].transpose.to_h.with_indifferent_access
 
     run.call(arguments)
   end

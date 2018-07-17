@@ -1,5 +1,5 @@
 class Room
-  extend DslBase
+  include DslBase
 
   attributes :name,
              :description
