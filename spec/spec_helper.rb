@@ -1,9 +1,4 @@
-require 'rubygems'
-require 'bundler/setup'
-
 RSpec.configure do |config|
-  Bundler.require
-
   require 'rspec/its'
 
   require_relative '../thegamar.rb'

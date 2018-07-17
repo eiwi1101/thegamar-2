@@ -1,25 +1,27 @@
 module DslBase
-  @@defined = []
+  attr_accessor :defined
 
   def define(&proc)
     item = new
     item.instance_eval &proc
-    @@defined.push item
 
-    puts "Loading: %-10s - %-40s [%04d]" % [name, item.name, @@defined.count]
+    self.defined ||= []
+    self.defined.push item
+
+    puts "Loading: %-10s - %-40s [%04d]" % [name, item.name, self.defined.count]
 
     item
   end
 
   def count
-    @@defined.count
+    self.defined.count
   end
 
 
   def attribute(attr)
     define_method(attr) do |val=nil|
       @attributes ||= {}
-      val.nil? ? @attributes[attr] : @attributes[attr] = val
+      val.nil? ? self.class._process_attribute(@attributes[attr]) : @attributes[attr] = val
     end
   end
 
@@ -34,6 +36,14 @@ module DslBase
   def containers(containers)
     containers.each do |name, container|
       container name, container
+    end
+  end
+
+  def _process_attribute(attr)
+    if attr.is_a? String
+      attr.squish
+    else
+      attr
     end
   end
 end
