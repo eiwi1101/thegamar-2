@@ -3,6 +3,8 @@ require 'spec_helper'
 describe Command do
   subject { Command }
 
+  before(:each) { PlayerState.init }
+
   its(:count) { is_expected.to_not eq 0 }
 
   context 'expecting room description' do
