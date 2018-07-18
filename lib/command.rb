@@ -14,11 +14,11 @@ class Command
     end
 
     if matches.many?
-      raise "Did you mean: #{matches.collect(&:name).join(', ')}"
+      raise CommandError.new "Did you mean: #{matches.collect(&:name).join(', ')}", input, matches: matches
     end
 
     if matches.none?
-      raise "I'm not sure what you meant."
+      raise CommandError.new "I'm not sure what you meant.", input
     end
 
     matches.first.execute(input)

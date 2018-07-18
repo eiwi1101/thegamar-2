@@ -15,7 +15,7 @@ module DslBase
       self.defined ||= []
       self.defined.push item
 
-      puts "Loading: %-10s - %-40s [%04d]" % [name, item.name, self.defined.count]
+      puts "Loading: %-10s - %-25s %15s [%04d]" % [name, item.name, const, self.defined.count]
 
       if const.nil?
         raise "DEPRECATION - #{item.name} should use define :CONST syntax."

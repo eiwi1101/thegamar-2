@@ -30,9 +30,16 @@ loop do
   begin
     result = Command.parse(command)
     result.print
+  rescue GameError => e
+    e.print
   rescue => e
-    puts e.message.colorize(:red)
-    puts e.backtrace.join("\n").colorize(:light_black)
+    if ENV['DEBUG']
+      print "Uncaught #{e.class.name}:".colorize(:light_red)
+      puts e.message.colorize(:red)
+      puts e.backtrace.join("\n").colorize(:light_black)
+    else
+      puts "Something went wrong :(".colorize(:red)
+    end
   end
 
   break if $*.any?
