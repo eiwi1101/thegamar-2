@@ -4,7 +4,7 @@ Command.define :C_SAVE do
   match /^s(?:ave)?\b/
 
   run -> (_args) do
-    puts Marshal.dump(player)
+    puts player.as_json
 
     Prompt.new("Game saved.")
   end

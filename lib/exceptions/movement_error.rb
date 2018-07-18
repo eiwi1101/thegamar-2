@@ -1,0 +1,2 @@
+class MovementError < GameError
+end

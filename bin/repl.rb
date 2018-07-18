@@ -34,7 +34,7 @@ loop do
     e.print
   rescue => e
     if ENV['DEBUG']
-      print "Uncaught #{e.class.name}:".colorize(:light_red)
+      print "Uncaught #{e.class.name}: ".colorize(:light_red)
       puts e.message.colorize(:red)
       puts e.backtrace.join("\n").colorize(:light_black)
     else

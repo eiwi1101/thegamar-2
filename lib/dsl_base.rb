@@ -1,4 +1,6 @@
 module DslBase
+  attr_accessor :const
+
   def self.included(base)
     base.extend(ClassMethods)
   end
@@ -10,10 +12,11 @@ module DslBase
       const = const_symbol.to_s
 
       item = new
+      item.const = const
       item.instance_eval &proc
 
-      self.defined ||= []
-      self.defined.push item
+      self.defined ||= {}
+      self.defined[const] = item
 
       puts "Loading: %-10s - %-25s %15s [%04d]" % [name, item.name, const, self.defined.count]
 
