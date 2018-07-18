@@ -32,6 +32,7 @@ loop do
     result.print
   rescue => e
     puts e.message.colorize(:red)
+    puts e.backtrace.join("\n").colorize(:light_black)
   end
 
   break if $*.any?

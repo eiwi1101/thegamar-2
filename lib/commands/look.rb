@@ -1,4 +1,4 @@
-C_LOOK = Command.define do
+Command.define :C_LOOK do
   name "Look"
   description "Look around you."
   match /^l(?:ook)?\b/

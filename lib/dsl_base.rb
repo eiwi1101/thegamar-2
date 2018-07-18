@@ -6,7 +6,9 @@ module DslBase
   module ClassMethods
     attr_accessor :defined
 
-    def define(&proc)
+    def define(const_symbol=nil, &proc)
+      const = const_symbol.to_s
+
       item = new
       item.instance_eval &proc
 
@@ -14,6 +16,14 @@ module DslBase
       self.defined.push item
 
       puts "Loading: %-10s - %-40s [%04d]" % [name, item.name, self.defined.count]
+
+      if const.nil?
+        raise "DEPRECATION - #{item.name} should use define :CONST syntax."
+      elsif (Kernel.const_get(const) rescue nil)
+        raise "ERROR - #{item.name} redefines const #{const}!"
+      else
+        Kernel.const_set const, item
+      end
 
       item
     end
@@ -34,7 +44,17 @@ module DslBase
     end
 
     def container(name, container)
+      define_method(name) do |&block|
+        @containers ||= {}
 
+        if block
+          @containers[name] = block
+        else
+          inst = container.new
+          inst.instance_eval &@containers[name]
+          inst
+        end
+      end
     end
 
     def containers(containers)
@@ -47,6 +67,18 @@ module DslBase
 
   def player
     PlayerState.instance
+  end
+
+  def properties
+    (@attributes || {}).merge (@containers || {})
+  end
+
+  def any?
+    properties.any?
+  end
+
+  def [](attribute)
+    self.send(attribute)
   end
 
   private

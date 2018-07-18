@@ -32,4 +32,8 @@ class Command
 
     run.call(arguments)
   end
+
+  def chain(command, args=nil)
+    command.run.call(args)
+  end
 end

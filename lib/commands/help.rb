@@ -1,4 +1,4 @@
-C_HELP = Command.define do
+Command.define :C_HELP do
   name "Help"
   description "Show this help."
   match /^(?:help|\?)(?:\s+(?<topic>.*?))?$/

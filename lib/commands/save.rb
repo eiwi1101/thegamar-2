@@ -1,4 +1,4 @@
-C_SAVE = Command.define do
+Command.define :C_SAVE do
   name "Save"
   description "Save your current game state."
   match /^s(?:ave)?\b/
