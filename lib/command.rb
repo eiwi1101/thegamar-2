@@ -31,11 +31,13 @@ class Command
     matches = match.match(resolve_alias input)
     arguments = [matches.names, matches.captures].transpose.to_h.with_indifferent_access
 
-    run.call(arguments)
+    arguments.each { |k, v| arguments[k] = v&.strip.presence }
+
+    perform(arguments)
   end
 
   def chain(command, args=nil)
-    command.run.call(args)
+    command.perform(args)
   end
 
   def alias?(input)
@@ -58,5 +60,11 @@ class Command
     resolved = input_parts.join(' ')
 
     resolved.strip
+  end
+
+  protected
+
+  def perform(args)
+    run.call(args)
   end
 end

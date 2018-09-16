@@ -1,0 +1,2 @@
+class CombatError < GameError
+end

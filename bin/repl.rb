@@ -9,6 +9,7 @@ unless ENV['DEBUG']
   end
 end
 
+command_history = []
 puts "Welcome to Thegamar!".colorize(:light_yellow)
 
 PlayerState.init
@@ -22,7 +23,12 @@ loop do
     puts command
   end
 
-  command ||= gets
+  begin
+    command ||= gets
+    command_history.push command
+  rescue Interrupt => _e
+    break
+  end
 
   break if command =~ /^exit|quit$/i
   String.color_samples if command == 'strcol'
