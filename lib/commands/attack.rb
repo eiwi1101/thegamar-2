@@ -20,7 +20,6 @@ Command.define :C_ATTACK do
     subtle += ", Target: #{target.health.percent_display}"
 
     Prompt.new result.flavor,
-               additional: subtle.colorize(:red),
-               table: result.damage_table.merge(player.health.to_h)
+               additional: subtle.colorize(:red)
   end
 end

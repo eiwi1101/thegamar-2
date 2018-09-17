@@ -3,6 +3,8 @@ Command.define :C_LOOK do
   description "Look around you."
   match /^l(?:ook)?\b/
 
+  flags :death
+
   run -> (_args) do
     current_room = player.current_room
 

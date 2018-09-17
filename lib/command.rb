@@ -65,6 +65,10 @@ class Command
   protected
 
   def perform(args)
+    if player.health.dead? and !flagged? :death
+      raise CommandError.new "You are dead!", args
+    end
+
     run.call(args)
   end
 end

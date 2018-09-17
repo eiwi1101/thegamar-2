@@ -1,4 +1,8 @@
 module DslBase
+  VALID_FLAGS = [
+      :death
+  ]
+
   attr_accessor :const
 
   def self.included(base)
@@ -84,6 +88,18 @@ module DslBase
     self.send(attribute)
   end
 
+
+  def flags(*flags)
+    flags.each { |f| _check_flag(f) }
+    @flags ||= []
+    @flags.push *flags.collect(&:to_sym)
+  end
+
+  def flagged?(flag)
+    _check_flag(flag)
+    @flags&.include? flag.to_sym
+  end
+
   private
 
   def _process_attribute(attr)
@@ -91,6 +107,12 @@ module DslBase
       attr.squish
     else
       attr
+    end
+  end
+
+  def _check_flag(flag)
+    unless VALID_FLAGS.include? flag.to_sym
+      raise "#{flag} is not a valid flag."
     end
   end
 end

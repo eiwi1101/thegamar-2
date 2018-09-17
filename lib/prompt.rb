@@ -1,14 +1,25 @@
 class Prompt
   def self.command_prefix
-    hp = PlayerState.instance.health.percent * 100
+    player = PlayerState.instance
+
+    hp = player.health.percent_display
+    thp = player.current_target&.health&.percent_display
 
     objects = {
-        hp: ("%d%%" % [hp]).colorize(:green),
+        hp: hp.colorize(:green),
+        thp: thp&.colorize(:yellow),
         room: (PlayerState.instance.current_room&.name || '<no room>').colorize(:light_green),
         prompt: '>'.colorize(:light_blue)
     }
 
-    "[%{room} - %{hp}]\n%{prompt} " % objects
+    data = [
+       "%{room}",
+       "%{hp}"
+    ]
+
+    data.push "T:%{thp}" if thp.present?
+
+    "[#{data.join(" - ")}]\n%{prompt} " % objects
   end
 
   def initialize(narrate, metadata = {})

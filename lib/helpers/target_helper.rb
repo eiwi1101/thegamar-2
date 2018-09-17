@@ -4,7 +4,17 @@ module TargetHelper
       return self.current_target
     end
 
-    return self
-    raise GameError.new "I can't find #{name}."
+    case name.downcase
+    when /^me|(my\s*)?self$/
+      return self
+    when /^assist$/
+      return self.current_target&.current_target
+    else
+      raise GameError.new "I can't find #{name}."
+    end
+  end
+
+  def reaction(to)
+    self == to ? :friendly : :hostile
   end
 end
