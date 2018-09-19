@@ -20,6 +20,10 @@ class PlayerState
                    wisdom: 10
   end
 
+  def equipment
+    OpenStruct.new main_hand: I_RUSTY_KNIFE
+  end
+
   def self.init
     state = self.instance
     state.current_room ||= SCARY_ROOM

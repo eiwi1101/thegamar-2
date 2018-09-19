@@ -1,11 +1,11 @@
 module CombatHelper
   def attack(target, with: nil)
-    unless !with or with.weapon?
-      raise CombatError.new "#{with.name} is not a weapon!"
-    end
-
     if target.health.dead?
       raise CombatError.new "#{target.name} is dead!"
+    end
+
+    if with.nil?
+      with = self.equipment.main_hand
     end
 
     damage = Damage.new self, target, with

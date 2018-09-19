@@ -10,6 +10,10 @@ class Damage
               :damage
 
   def initialize(attacker, target, weapon)
+    if weapon and !weapon.weapon?
+      raise CombatError.new "#{weapon.name} is not a weapon!"
+    end
+
     @attacker = attacker
     @target = target
     @weapon = weapon
@@ -39,9 +43,11 @@ class Damage
   end
 
   def flavor
-    return "You fail." if miss?
-    return "You attack super hard!" if critical?
-    "You attack."
+    text = weapon&.combat_text
+
+    return text&.miss || "You fail." if miss?
+    return text&.critical || "You attack super hard!" if critical?
+    text&.hit || "You attack."
   end
 
   def damage_table
@@ -60,6 +66,20 @@ class Damage
 
   private
 
+  def _resolve_damage(roll)
+    total = 0
+
+    if roll.is_a? Hash
+      roll.each do |stat, mod|
+        total = @attacker.stats[stat] + mod
+      end
+    else
+      total += roll.to_i
+    end
+
+    total
+  end
+
   def _calc_weapon_damage
     if self.miss?
       return @weapon_damage = 0
@@ -68,7 +88,7 @@ class Damage
     if self.weapon.nil?
       base = @attacker.stats.strength
     else
-      base = @weapon.damage
+      base = _resolve_damage @weapon.damage
     end
 
     if critical?
