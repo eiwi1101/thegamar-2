@@ -9,7 +9,7 @@ Command.define :C_MOVE do
 
   aliases movement_aliases.merge ExitMap::DIRECTION_ALIAS
 
-  run -> (args) do
+  run -> (player, args) do
     unless args[:direction]
       raise MovementError.new "You should specify a direction."
     end
@@ -26,6 +26,6 @@ Command.define :C_MOVE do
 
     player.current_room = new_room
 
-    chain C_LOOK
+    chain C_LOOK, player
   end
 end

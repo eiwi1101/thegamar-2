@@ -1,9 +1,9 @@
 require 'spec_helper'
 
 describe Command do
-  subject { Command }
+  let(:player) { Player.new }
 
-  before(:each) { PlayerState.init }
+  subject { Command }
 
   its(:count) { is_expected.to_not eq 0 }
 
@@ -13,7 +13,7 @@ describe Command do
 
     it 'parses look' do
       expect(Prompt).to receive(:new).with(expected).and_call_original
-      Command.parse 'LOOK'
+      Command.parse player, 'LOOK'
     end
 
     describe 'look' do
@@ -25,7 +25,7 @@ describe Command do
         input = "look"
 
         expect(Prompt).to receive(:new).with(expected).and_call_original
-        subject.execute(input)
+        subject.execute(player, input)
       end
     end
   end

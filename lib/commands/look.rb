@@ -5,7 +5,7 @@ Command.define :C_LOOK do
 
   flags :death
 
-  run -> (_args) do
+  run -> (player, _args) do
     current_room = player.current_room
 
     if current_room.nil?

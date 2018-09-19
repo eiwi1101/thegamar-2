@@ -1,15 +1,13 @@
 require 'spec_helper'
 
 describe C_MOVE do
-  let(:player) { PlayerState.instance }
+  let(:player) { Player.new }
   let(:input) { 'move north' }
 
   subject { C_MOVE }
 
-  before(:each) { PlayerState.reset }
-
   describe '#execute' do
-    subject { C_MOVE.execute input }
+    subject { C_MOVE.execute player, input }
 
     it { expect { subject }.to change { player.current_room } }
 

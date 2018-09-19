@@ -5,7 +5,7 @@ Command.define :C_SAVE do
 
   flags :death
 
-  run -> (_args) do
+  run -> (player, _args) do
     puts player.as_json
 
     Prompt.new("Game saved.")

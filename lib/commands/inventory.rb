@@ -3,7 +3,7 @@ Command.define :C_INVENTORY do
   description "Shows what you are carrying."
   match /^i(?:nv(?:entory)?)?\b/i
 
-  run -> (_args) do
+  run -> (player, _args) do
     if player.inventory.empty?
       Prompt.new "You are empty handed."
     else

@@ -1,14 +1,12 @@
 class Prompt
-  def self.command_prefix
-    player = PlayerState.instance
-
+  def self.command_prefix(player)
     hp = player.health.percent_display
     thp = player.current_target&.health&.percent_display
 
     objects = {
         hp: hp.colorize(:green),
         thp: thp&.colorize(:yellow),
-        room: (PlayerState.instance.current_room&.name || '<no room>').colorize(:light_green),
+        room: (player.current_room&.name || '<no room>').colorize(:light_green),
         prompt: '>'.colorize(:light_blue)
     }
 

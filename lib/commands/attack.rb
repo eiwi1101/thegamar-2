@@ -3,7 +3,7 @@ Command.define :C_ATTACK do
   description "Attack with your weapon, or flail unarmed."
   match /^attack(?<target>\s+(?!with).*?)?(?:\s+with\s+(?<weapon>.*?))?$/i
 
-  run -> (args) do
+  run -> (player, args) do
     target = player.find_target args[:target]
     weapon = player.find_item args[:weapon]
 

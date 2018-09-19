@@ -12,7 +12,7 @@ end
 command_history = []
 puts "Welcome to Thegamar!".colorize(:light_yellow)
 
-player = PlayerState.init
+player = Player.new name: "Repl"
 
 player.on_prompt do |prompt|
   prompt.print
@@ -20,7 +20,7 @@ end
 
 loop do
   puts
-  print Prompt.command_prefix
+  print Prompt.command_prefix(player)
 
   if $*.any?
     command = $*&.join(' ')
@@ -38,7 +38,7 @@ loop do
   String.color_samples if command == 'strcol'
 
   begin
-    Command.parse(command)
+    Command.parse(player, command)
   rescue GameError => e
     e.print
   rescue => e

@@ -5,7 +5,7 @@ Command.define :C_TARGET do
 
   flags :death
 
-  run -> (args) do
+  run -> (player, args) do
     if args[:target].blank?
       target = player.current_target
 

@@ -7,7 +7,7 @@ class Command
              :run,
              :aliases
 
-  def self.parse(input)
+  def self.parse(player, input)
     input.downcase!
 
     matches = defined.values.select do |command|
@@ -22,10 +22,10 @@ class Command
       raise CommandError.new "I'm not sure what you meant.", input
     end
 
-    matches.first.execute(input)
+    matches.first.execute(player, input)
   end
 
-  def execute(input)
+  def execute(player, input)
     not_implemented if run.nil?
 
     matches = match.match(resolve_alias input)
@@ -33,11 +33,11 @@ class Command
 
     arguments.each { |k, v| arguments[k] = v&.strip.presence }
 
-    perform(arguments)
+    perform(player, arguments)
   end
 
-  def chain(command, args=nil)
-    command.perform(args)
+  def chain(command, player, args=nil)
+    command.perform(player, args)
   end
 
   def alias?(input)
@@ -64,12 +64,12 @@ class Command
 
   protected
 
-  def perform(args)
+  def perform(player, args)
     if player.health.dead? and !flagged? :death
       raise CommandError.new "You are dead!", args
     end
 
-    result = run.call(args)
+    result = run.call(player, args)
 
     if result.is_a? Prompt
       player.send_prompt(result)

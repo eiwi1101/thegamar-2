@@ -3,7 +3,7 @@ Command.define :C_HELP do
   description "Show this help."
   match /^(?:help|\?)(?:\s+(?<topic>.*?))?$/
 
-  run -> (args) do
+  run -> (player, args) do
     table = Command.defined.collect do |command|
       const, cmd = command
       [cmd.name, cmd.description]

@@ -35,6 +35,10 @@ module DslBase
       item
     end
 
+    def lookup(const)
+      self.defined[const]
+    end
+
     def count
       self.defined.count
     end
@@ -71,10 +75,6 @@ module DslBase
     end
   end
 
-
-  def player
-    PlayerState.instance
-  end
 
   def properties
     (@attributes || {}).merge (@containers || {})
