@@ -4,7 +4,8 @@ Command.define :C_HELP do
   match /^(?:help|\?)(?:\s+(?<topic>.*?))?$/
 
   run -> (args) do
-    table = Command.defined.collect do |cmd|
+    table = Command.defined.collect do |command|
+      const, cmd = command
       [cmd.name, cmd.description]
     end
 

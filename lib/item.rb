@@ -6,4 +6,12 @@ class Item
              :stack_count,
              :unique_count,
              :value
+
+  def weapon?
+    false
+  end
+
+  def equipment?
+    false
+  end
 end

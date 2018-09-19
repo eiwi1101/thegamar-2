@@ -11,15 +11,6 @@ Command.define :C_ATTACK do
       raise CombatError.new "You need a target!"
     end
 
-    result = player.attack target, with: weapon
-
-    subtle = "#{result.damage} damage"
-    subtle += " (#{result.overkill} overkill)" if result.overkill > 0
-    subtle += " (Critical!)" if result.critical?
-    subtle += " (Miss)" if result.miss?
-    subtle += ", Target: #{target.health.percent_display}"
-
-    Prompt.new result.flavor,
-               additional: subtle.colorize(:red)
+    player.attack target, with: weapon
   end
 end

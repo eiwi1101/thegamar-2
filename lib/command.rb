@@ -69,6 +69,10 @@ class Command
       raise CommandError.new "You are dead!", args
     end
 
-    run.call(args)
+    result = run.call(args)
+
+    if result.is_a? Prompt
+      player.send_prompt(result)
+    end
   end
 end

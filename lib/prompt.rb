@@ -45,8 +45,8 @@ class Prompt
 
   def _print_table(table)
     return _print_hash(table) if table.is_a? Hash
-    col_sep = '|'.colorize(:light_black)
-    row_sep = '-'.colorize(:light_black)
+    col_sep = ''.colorize(:light_black)
+    row_sep = ''.colorize(:light_black)
     row_pad = ' '
 
     col_lengths = table.transpose.collect do |col|

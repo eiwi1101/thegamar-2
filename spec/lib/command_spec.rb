@@ -25,9 +25,7 @@ describe Command do
         input = "look"
 
         expect(Prompt).to receive(:new).with(expected).and_call_original
-
-        result = subject.execute(input)
-        expect(result).to be_a Prompt
+        subject.execute(input)
       end
     end
   end

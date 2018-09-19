@@ -3,6 +3,7 @@ module InventoryHelper
     return if name.nil?
 
     item_scope = self.equipment.to_h.values
+    item_scope.push *self.inventory.collect(&:item)
 
     matches = item_scope.select { |item| item.name =~ /#{Regexp.escape(name)}/i }
 
