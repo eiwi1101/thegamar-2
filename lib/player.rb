@@ -49,5 +49,13 @@ class Player
     }
   end
 
+  def to_str
+    "#<%s:%x '%s'>" % [
+        self.class.name,
+        self.object_id,
+        @name
+    ]
+  end
+
   alias :as_json :to_h
 end

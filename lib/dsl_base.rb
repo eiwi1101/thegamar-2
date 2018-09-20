@@ -100,6 +100,14 @@ module DslBase
     @flags&.include? flag.to_sym
   end
 
+  def to_str
+    "#<%s:%x %s>" % [
+        self.class.name,
+        self.object_id,
+        self.const
+    ]
+  end
+
   private
 
   def _process_attribute(attr)
