@@ -108,6 +108,8 @@ module DslBase
     ]
   end
 
+  alias :inspect :to_s
+
   private
 
   def _process_attribute(attr)

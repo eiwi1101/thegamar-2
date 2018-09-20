@@ -57,5 +57,7 @@ class Player
     ]
   end
 
+  alias :inspect :to_s
+
   alias :as_json :to_h
 end
