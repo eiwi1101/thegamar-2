@@ -100,7 +100,7 @@ module DslBase
     @flags&.include? flag.to_sym
   end
 
-  def to_str
+  def to_s
     "#<%s:%x %s>" % [
         self.class.name,
         self.object_id,
