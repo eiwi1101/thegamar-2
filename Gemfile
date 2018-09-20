@@ -12,4 +12,5 @@ gem 'colorize'
 group :development, :test do
   gem 'rspec'
   gem 'rspec-its'
+  gem 'rspec_junit_formatter'
 end
