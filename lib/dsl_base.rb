@@ -101,9 +101,8 @@ module DslBase
   end
 
   def to_s
-    "#<%s:%x %s>" % [
+    "%s(%s)" % [
         self.class.name,
-        self.object_id,
         self.const
     ]
   end
