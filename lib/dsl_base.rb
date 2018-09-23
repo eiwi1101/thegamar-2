@@ -42,7 +42,6 @@ module DslBase
         Kernel.const_set const, item
       end
 
-      item.validate
       item
     end
 
@@ -65,17 +64,39 @@ module DslBase
       attrs.each { |a| attribute(a) }
     end
 
-    def container(name, container)
+    def container(name, container, options={})
       define_method(name) do |&block|
         @containers ||= {}
 
         if block
           @containers[name] = block
         else
-          inst = container.new
-          inst.instance_eval &@containers[name]
-          inst
+          if (proc = @containers[name])
+            if proc.is_a? Proc
+              inst = container.new
+              inst.instance_eval &proc
+              @containers[name] = inst
+            else
+              proc
+            end
+          else
+            nil
+          end
         end
+      end
+
+      validate name do
+        inst = self.send(name)
+
+        if inst.respond_to? :valid? and inst.invalid?
+          inst.errors.each do |field, error|
+            self.errors.add name.to_s + '.' + field.to_s, error
+          end
+        end
+      end
+
+      if options[:required]
+        validates_presence_of name, message: "is a required #{container} container"
       end
     end
 
@@ -83,6 +104,17 @@ module DslBase
       containers.each do |name, container|
         container name, container
       end
+    end
+
+    def validate_all!
+      valid = true
+      self.defined.each do |k, v|
+        if v.invalid?
+          valid = false
+          puts "#{k} is invalid: #{v.errors.full_messages}"
+        end
+      end
+      valid
     end
   end
 
@@ -123,10 +155,16 @@ module DslBase
   def set_defaults!
     @attributes ||= {}
 
-    if self.class.defaults
-      self.class.defaults.each do |key, value|
-        @attributes[key] ||= value
-      end
+    klass = self.class
+    defaults = {}
+
+    begin
+      defaults.merge! klass.defaults || {}
+      klass = klass.parent
+    end while klass.respond_to? :defaults
+
+    defaults.each do |key, value|
+      @attributes[key] ||= value
     end
   end
 
