@@ -3,6 +3,8 @@ Command.define :C_REVIVE do
   description "TEST - Bring yourself back to life."
   match /^revive\b/
 
+  flags :death
+
   run -> (player, _args) do
     player.health.reset!
 
@@ -15,6 +17,6 @@ Command.define :C_REVIVE do
         "If only it were this easy."
     ].sample
 
-    Prompt.new narrate
+    Prompt.new narrate, subtle: "(Your health has been restored.)"
   end
 end

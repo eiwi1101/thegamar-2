@@ -9,7 +9,8 @@ class Player
                 :current_target
 
   attr_reader :stats,
-              :health
+              :health,
+              :name
 
   def initialize(data = {})
     @name = data[:name] || "Anonymous"

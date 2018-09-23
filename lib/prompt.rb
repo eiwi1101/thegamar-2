@@ -28,6 +28,11 @@ class Prompt
   def print
     puts @narrate.colorize(:white)
 
+    if (subtle = @metadata[:subtle])
+      @metadata[:additional] ||= []
+      @metadata[:additional].unshift subtle.colorize(:light_black)
+    end
+
     if (additional = @metadata[:additional])
       additional = [additional] unless additional.is_a? Array
       additional.each do |line|
