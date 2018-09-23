@@ -1,10 +1,11 @@
 require 'bundler/setup'
 Bundler.require
 
-$WORLD_GAME_PATH = 'spec/fixtures/world'
+$WORLD_GAME_PATH = 'spec/fixtures'
 
 RSpec.configure do |config|
   require 'rspec/its'
+  require 'shoulda-matchers'
 
   require_all 'spec/support'
 

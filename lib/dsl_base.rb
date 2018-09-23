@@ -6,11 +6,20 @@ module DslBase
   attr_accessor :const
 
   def self.included(base)
-    base.extend(ClassMethods)
+    base.include ActiveModel::Validations
+    base.extend ClassMethods
   end
 
   module ClassMethods
     attr_accessor :defined
+    attr_accessor :defaults
+
+    def validates(field, options={})
+      default = options.delete(:default)
+      self.defaults ||= {}
+      self.defaults[field] ||= default
+      super(field, options)
+    end
 
     def define(const_symbol=nil, &proc)
       const = const_symbol.to_s
@@ -18,6 +27,7 @@ module DslBase
       item = new
       item.const = const
       item.instance_eval &proc
+      item.set_defaults!
 
       self.defined ||= {}
       self.defined[const] = item
@@ -32,6 +42,7 @@ module DslBase
         Kernel.const_set const, item
       end
 
+      item.validate
       item
     end
 
@@ -108,6 +119,16 @@ module DslBase
   end
 
   alias :inspect :to_s
+
+  def set_defaults!
+    @attributes ||= {}
+
+    if self.class.defaults
+      self.class.defaults.each do |key, value|
+        @attributes[key] ||= value
+      end
+    end
+  end
 
   private
 
