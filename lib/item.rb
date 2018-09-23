@@ -47,6 +47,10 @@ class Item
   validates :quality, inclusion: { in: QUALITIES.keys }, default: :useless
 
 
+  def colorized_name
+    name.colorize(QUALITIES[quality][:color])
+  end
+
   def weapon?
     false
   end

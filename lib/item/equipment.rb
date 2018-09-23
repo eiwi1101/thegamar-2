@@ -2,11 +2,32 @@ require_relative '../stats'
 
 class Item::Equipment < Item
   SLOTS = {
+      head: {
+          name: "Head"
+      },
       neck: {
           name: "Neck"
       },
+      chest: {
+          name: "Chest"
+      },
+      hands: {
+          name: "Hands"
+      },
+      waist: {
+          name: "Waist"
+      },
+      legs: {
+          name: "Legs"
+      },
+      feet: {
+          name: "Feet"
+      },
       main_hand: {
           name: "Main Hand"
+      },
+      accessory: {
+          name: "Accessory"
       }
   }
 
