@@ -67,7 +67,7 @@ class Prompt
     hash.each do |k, v|
       puts "%s#{':'.colorize(:white)} %s" % [
           k.to_s.humanize.colorize(:white),
-          v.to_s.colorize(:black)
+          v.to_s
       ]
     end
   end

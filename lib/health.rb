@@ -40,6 +40,10 @@ class Health
     @damage = [base, total].min
   end
 
+  def reset!
+    @damage = 0
+  end
+
   alias :<< :take_damage
 
   def health_table

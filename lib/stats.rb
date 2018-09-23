@@ -46,6 +46,11 @@ class Stats
     self
   end
 
+  def reset!
+    VALID_STATS.each { |s| @modifiers[s] = 0 }
+    self
+  end
+
   def to_h
     VALID_STATS.collect do |stat|
       [stat, self[stat]]

@@ -31,7 +31,7 @@ class Player
   end
 
   def stats
-    base = @stats.dup
+    base = @stats.reset!
     equipment.to_h.each do |_slot, item|
       base += item.stats
     end
