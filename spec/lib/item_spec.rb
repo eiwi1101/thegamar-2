@@ -34,7 +34,7 @@ describe Item do
       i = I_WEAPON
       expect(i.quality).to eq :useless
       expect(i).to_not be_valid
-      expect(i.errors.count).to eq 1
+      expect(i.errors.count).to eq 3
       expect(i.errors[:combat_text].count).to be > 0
     end
 

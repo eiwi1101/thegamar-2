@@ -18,7 +18,7 @@ module DslBase
       default = options.delete(:default)
       self.defaults ||= {}
       self.defaults[field] ||= default
-      super(field, options)
+      super(field, options) if options.any?
     end
 
     def define(const_symbol=nil, &proc)

@@ -1,3 +1,5 @@
+require_relative './stats'
+
 class Player
   include TargetHelper
   include InventoryHelper
@@ -12,12 +14,13 @@ class Player
   def initialize(data = {})
     @name = data[:name] || "Anonymous"
     @current_room = Room.lookup(data[:current_room]) || SCARY_ROOM
-    @stats = Stats.new data[:stats] || {}
+    @stats = Stats.new data[:stats] || {}, default: 10
     @health = Health.new self, data[:health_depleted] || 0
   end
 
   def equipment
-    OpenStruct.new main_hand: I_RUSTY_KNIFE
+    OpenStruct.new main_hand: I_RUSTY_KNIFE,
+                   neck: I_FRAGMENT_OF_EGG
   end
 
   def inventory
@@ -25,6 +28,14 @@ class Player
         OpenStruct.new(quantity: 3,
                        item: I_WINE_GLASS)
     ]
+  end
+
+  def stats
+    base = @stats.dup
+    equipment.to_h.each do |_slot, item|
+      base += item.stats
+    end
+    base
   end
 
   def on_prompt(&proc)
