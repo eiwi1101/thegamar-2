@@ -25,9 +25,19 @@ EM.run do
 
     ws.onmessage do |message|
       begin
-        Command.parse player, message
+        data = JSON.parse(message)
+        puts data.inspect
+
+        case data['type']
+        when 'COMMAND'
+          Command.parse player, data['command']
+        else
+          ws.send({type: 'ECHO', message: data}.to_json)
+        end
       rescue GameError => e
         ws.send({type: 'ERROR', message: e.message}.to_json)
+      rescue Exception => e
+        ws.send({type: 'CRITICAL', message: e.message}.to_json)
       end
     end
   end

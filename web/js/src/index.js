@@ -15,7 +15,7 @@ const socket = setupSocket(store.dispatch, store.getState);
 
 ReactDOM.render(
   <Provider store={store}>
-    <App />
+    <App socket={socket} />
   </Provider>,
   document.getElementById('root')
 );

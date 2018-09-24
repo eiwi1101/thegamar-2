@@ -1,29 +1,27 @@
 import * as types from '../constants/ActionTypes'
 
 let nextMessageId = 0
-let nextUserId = 0
 
-export const addMessage = (message, author) => ({
-  type: types.ADD_MESSAGE,
+export const addPrompt = (message) => ({
+  type: types.PROMPT,
   id: nextMessageId++,
-  message,
-  author
+  message: message.narrate,
+  metadata: message.metadata
 })
 
-export const addUser = name => ({
-  type: types.ADD_USER,
-  id: nextUserId++,
-  name
-})
-
-export const messageReceived = (message, author) => ({
-  type: types.MESSAGE_RECEIVED,
+export const addError = (message) => ({
+  type: types.ERROR,
   id: nextMessageId++,
-  message,
-  author
+  message
 })
 
-export const populateUsersList = users => ({
-  type: types.USERS_LIST,
-  users
+export const addCritical = (message) => ({
+  type: types.ERROR,
+  id: nextMessageId++,
+  message
+})
+
+export const addInput = (command) => ({
+  type: types.INPUT,
+  command
 })

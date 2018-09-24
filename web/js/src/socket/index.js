@@ -1,8 +1,8 @@
 import * as types from '../constants/ActionTypes'
-import { addUser, messageReceived, populateUsersList } from '../actions'
+import { addError, addCritical, addPrompt } from '../actions'
 
 const setupSocket = (dispatch, username) => {
-  const socket = new WebSocket('ws://dev.stickermule.com:8989')
+  const socket = new WebSocket(`ws://${window.location.hostname}:8080`)
 
   socket.onopen = () => {
     socket.send(JSON.stringify({
@@ -15,16 +15,17 @@ const setupSocket = (dispatch, username) => {
     const data = JSON.parse(event.data)
     console.log({data})
     switch (data.type) {
-      case types.ADD_MESSAGE:
-        dispatch(messageReceived(data.message, data.author))
+      case types.ERROR:
+        dispatch(addError(data.message))
         break
-      case types.ADD_USER:
-        dispatch(addUser(data.name))
+      case types.CRITICAL:
+        dispatch(addCritical(data.message))
         break
-      case types.USERS_LIST:
-        dispatch(populateUsersList(data.users))
+      case types.PROMPT:
+        dispatch(addPrompt(data.message))
         break
       default:
+        dispatch(addError(`Unhandled: ${JSON.stringify(data)}`))
         break
     }
   }
