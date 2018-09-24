@@ -32,6 +32,7 @@ module DslBase
         Kernel.const_set const, item
       end
 
+      item.post_initialize
       item
     end
 
@@ -54,14 +55,14 @@ module DslBase
       attrs.each { |a| attribute(a) }
     end
 
-    def container(name, container)
+    def container(name, container, *container_args)
       define_method(name) do |&block|
         @containers ||= {}
 
         if block
           @containers[name] = block
         else
-          inst = container.new
+          inst = container.new *container_args
           inst.instance_eval &@containers[name]
           inst
         end
@@ -75,6 +76,14 @@ module DslBase
     end
   end
 
+
+  def post_initialize
+    true
+  end
+
+  def reset!
+    post_initialize
+  end
 
   def properties
     (@attributes || {}).merge (@containers || {})
