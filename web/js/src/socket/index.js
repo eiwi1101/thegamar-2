@@ -2,7 +2,7 @@ import * as types from '../constants/ActionTypes'
 import { addError, addCritical, addPrompt } from '../actions'
 
 const setupSocket = (dispatch, username) => {
-  const socket = new WebSocket(`ws://${window.location.hostname}:8080`)
+  const socket = new WebSocket(`ws://${window.location.hostname}:8989`)
 
   socket.onopen = () => {
     socket.send(JSON.stringify({
