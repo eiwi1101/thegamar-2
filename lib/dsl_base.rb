@@ -65,23 +65,17 @@ module DslBase
       attrs.each { |a| attribute(a) }
     end
 
-    def container(name, container, *container_args)
+    def container(name, container, options = {})
       define_method(name) do |&block|
         @containers ||= {}
-        options = {}
-
-        if container_args.first.is_a? Hash
-          options = {
-              required: container_args.first.delete(:required)
-          }
-        end
 
         if block
           @containers[name] = block
         else
           if (proc = @containers[name])
             if proc.is_a? Proc
-              inst = container.new *container_args
+              inst = options[:container] ? container.new(*options[:container]) : container.new
+
               inst.instance_eval &proc
               @containers[name] = inst
             else

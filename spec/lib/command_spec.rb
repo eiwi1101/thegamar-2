@@ -8,11 +8,10 @@ describe Command do
   its(:count) { is_expected.to_not eq 0 }
 
   context 'expecting room description' do
-    let(:expected) { "You see before you a small, concrete chamber. Dried brown bloodstains " +
-                     "cover the cracked, concrete floor. It reeks of death." }
+    let(:expected) { "A Scary Room".colorize(:black) }
 
     it 'parses look' do
-      expect(Prompt).to receive(:new).with(expected).and_call_original
+      expect(Prompt).to receive(:new).with(expected, any_args).and_call_original
       Command.parse player, 'LOOK'
     end
 
@@ -24,7 +23,7 @@ describe Command do
       it 'runs' do
         input = "look"
 
-        expect(Prompt).to receive(:new).with(expected).and_call_original
+        expect(Prompt).to receive(:new).with(expected, any_args).and_call_original
         subject.execute(player, input)
       end
     end

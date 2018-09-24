@@ -12,7 +12,7 @@ class Npc
              :current_room,
              :current_target
 
-  container :stats, Stats, default: 10
+  container :stats, Stats, container: [{ default: 10 }]
 
   def post_initialize
     @health = Health.new self

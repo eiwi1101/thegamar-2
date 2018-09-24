@@ -31,7 +31,7 @@ class Stats
 
   def get(stat)
     base = instance_variable_get _var(stat)
-    base + @modifiers[stat] || 0
+    base + (@modifiers[stat] || 0)
   end
 
   def set(stat, value)
