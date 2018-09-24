@@ -26,7 +26,16 @@ class Prompt
   end
 
   def print
-    puts @narrate.colorize(:white)
+    if @narrate =~ /\x1b/
+      puts @narrate
+    else
+      puts @narrate.colorize(:white)
+    end
+
+    if (subtle = @metadata[:subtle])
+      @metadata[:additional] ||= []
+      @metadata[:additional].unshift subtle.colorize(:light_black)
+    end
 
     if (additional = @metadata[:additional])
       additional = [additional] unless additional.is_a? Array
@@ -43,22 +52,19 @@ class Prompt
 
   def _print_table(table)
     return _print_hash(table) if table.is_a? Hash
-    col_sep = ''.colorize(:light_black)
-    row_sep = ''.colorize(:light_black)
-    row_pad = ' '
+    col_sep = ' - '.colorize(:light_black)
+    row_pad = ''
 
     col_lengths = table.transpose.collect do |col|
       col.collect(&:length).max
     end
 
-    format = col_sep + row_pad + col_lengths.collect { |l| "%-#{l}s" }.join(row_pad + col_sep + row_pad) + row_pad + col_sep
-    row_string = (format % col_lengths.collect { |l| row_sep * l }).tr('|', '+')
+    format = row_pad + col_lengths.collect { |l| "%-#{l}s" }.join(row_pad + col_sep + row_pad) + row_pad
 
-    puts row_string
+    puts
 
     table.each do |row|
       puts format % row
-      puts row_string
     end
   end
 
@@ -67,7 +73,7 @@ class Prompt
     hash.each do |k, v|
       puts "%s#{':'.colorize(:white)} %s" % [
           k.to_s.humanize.colorize(:white),
-          v.to_s.colorize(:black)
+          v.to_s
       ]
     end
   end

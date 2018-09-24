@@ -12,6 +12,9 @@ Command.define :C_LOOK do
       raise "You are not in any room!"
     end
 
-    Prompt.new current_room.description
+    Prompt.new current_room.name.colorize(:black),
+               additional: [
+                   current_room.description
+               ]
   end
 end

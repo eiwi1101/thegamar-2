@@ -1,3 +1,4 @@
+require_relative '../../lib/stats'
 require 'spec_helper'
 
 describe Stats do
@@ -9,7 +10,7 @@ describe Stats do
   end
 
   it 'assigns defaults' do
-    s = Stats.new
+    s = Stats.new({}, default: 10)
     expect(s.wisdom).to eq 10
   end
 
@@ -22,7 +23,7 @@ describe Stats do
 
   describe '#to_h' do
     it 'serializes' do
-      s = Stats.new
+      s = Stats.new({}, default: 10)
       expect(s.to_h).to include strength: 10
     end
 

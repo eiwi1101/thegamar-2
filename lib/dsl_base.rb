@@ -6,11 +6,20 @@ module DslBase
   attr_accessor :const
 
   def self.included(base)
-    base.extend(ClassMethods)
+    base.include ActiveModel::Validations
+    base.extend ClassMethods
   end
 
   module ClassMethods
     attr_accessor :defined
+    attr_accessor :defaults
+
+    def validates(field, options={})
+      default = options.delete(:default)
+      self.defaults ||= {}
+      self.defaults[field] ||= default
+      super(field, options) if options.any?
+    end
 
     def define(const_symbol=nil, &proc)
       const = const_symbol.to_s
@@ -18,6 +27,7 @@ module DslBase
       item = new
       item.const = const
       item.instance_eval &proc
+      item.set_defaults!
 
       self.defined ||= {}
       self.defined[const] = item
@@ -58,14 +68,43 @@ module DslBase
     def container(name, container, *container_args)
       define_method(name) do |&block|
         @containers ||= {}
+        options = {}
+
+        if container_args.first.is_a? Hash
+          options = {
+              required: container_args.first.delete(:required)
+          }
+        end
 
         if block
           @containers[name] = block
         else
-          inst = container.new *container_args
-          inst.instance_eval &@containers[name]
-          inst
+          if (proc = @containers[name])
+            if proc.is_a? Proc
+              inst = container.new *container_args
+              inst.instance_eval &proc
+              @containers[name] = inst
+            else
+              proc
+            end
+          else
+            nil
+          end
         end
+      end
+
+      validate name do
+        inst = self.send(name)
+
+        if inst.respond_to? :valid? and inst.invalid?
+          inst.errors.each do |field, error|
+            self.errors.add name.to_s + '.' + field.to_s, error
+          end
+        end
+      end
+
+      if options[:required]
+        validates_presence_of name, message: "is a required #{container} container"
       end
     end
 
@@ -73,6 +112,17 @@ module DslBase
       containers.each do |name, container|
         container name, container
       end
+    end
+
+    def validate_all!
+      valid = true
+      self.defined.each do |k, v|
+        if v.invalid?
+          valid = false
+          puts "#{k} is invalid: #{v.errors.full_messages}"
+        end
+      end
+      valid
     end
   end
 
@@ -117,6 +167,22 @@ module DslBase
   end
 
   alias :inspect :to_s
+
+  def set_defaults!
+    @attributes ||= {}
+
+    klass = self.class
+    defaults = {}
+
+    begin
+      defaults.merge! klass.defaults || {}
+      klass = klass.parent
+    end while klass.respond_to? :defaults
+
+    defaults.each do |key, value|
+      @attributes[key] ||= value
+    end
+  end
 
   private
 

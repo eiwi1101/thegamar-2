@@ -8,7 +8,7 @@ Command.define :C_INVENTORY do
       Prompt.new "You are empty handed."
     else
       inventory_table = player.inventory.collect do |item|
-        ["%dx" % [item.quantity], item.item.name || "?"]
+        ["%dx" % [item.quantity], item.item.colorized_name || "?"]
       end
 
       Prompt.new "You are carrying:",
