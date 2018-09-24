@@ -5,31 +5,76 @@
 }
 body {
   font-family: "Press Start 2P";
+  background-color: #3f3f3f;
 }
 #container {
   display: grid;
   grid-template-columns: 3fr 1fr;
   grid-template-areas: "main sidebar";
   width: 100vw;
-  height: 100vh;
+  height: 80vh;
+  max-width: 1200px;
+  margin: 10vh auto;
+  position: relative;
+  background-color: black;
+  color: white;
+  border-radius: 3px;
+  box-shadow: 0 0 4px 2px rgba(0,0,0,0.3);
 }
+
 #main {
   grid-area: main;
+  position: relative;
 }
+
 #new-message {
-  position: fixed;
+  position: absolute;
   bottom: 0;
   width: 100%;
-  padding: 5px;
+  padding: 0;
   margin-left: 0px;
   border-top: 1px solid #3f3f3f;
+  height: 36px;
+  overflow: hidden;
 }
+
+#new-message form {
+  display: flex;
+  width: 100%;
+  background-color: rgba(255,255,255,0.1);
+}
+
+#new-message input {
+  background-color: transparent;
+  font: inherit;
+  padding: 8px 10px;
+  vertical-align: middle;
+  height: 36px;
+  display: block;
+  flex: 0 1 auto;
+  border: none;
+  color: inherit;
+}
+
+#new-message input:focus {
+  outline: none;
+}
+
+#new-message input[type=text] {
+  flex-grow: 1;
+}
+
+#new-message input[type=submit] {
+  background-color: rgba(255,255,255,0.1);
+  text-align: center;
+}
+
 #messages-list {
-  padding: 5px 0 0 5px;
+  padding: 10px;
 }
 #sidebar {
   grid-area: sidebar;
-  padding: 5px 0 0 5px;
+  padding: 10px;
   border-left: 1px solid #3f3f3f;
   height: 100%;
 }

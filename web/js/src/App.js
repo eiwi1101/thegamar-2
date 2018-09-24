@@ -1,20 +1,19 @@
 import React, { Component } from "react";
-import AnsiUp from 'ansi_up'
 import "./App.css";
 
 import Prompt from './prompt'
 import {connect} from 'react-redux'
+import Message from './message'
 
 class App extends Component {
   render() {
     console.log(this.props, this.props.state.commands)
-    const ansi_up = new AnsiUp()
 
     return (
       <div id="container">
         <section id="main">
           <section id="messages-list">
-            { this.props.state.commands.map((s) => <div key={s.id} dangerouslySetInnerHTML={{__html: ansi_up.ansi_to_html(s.message)}} />) }
+            { this.props.state.commands.map((s) => <Message {...s} />) }
           </section>
           <section id="new-message">
             <Prompt socket={this.props.socket} />

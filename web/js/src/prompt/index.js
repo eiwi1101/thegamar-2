@@ -27,7 +27,7 @@ class Prompt extends Component {
   render() {
     return(<div id='prompt'>
       <form onSubmit={this.handleSubmit}>
-        <input type={'text'} name={'command'} onChange={this.handleInputChange} value={this.state.command} autoComplete={'none'} />
+        <input type={'text'} name={'command'} onChange={this.handleInputChange} value={this.state.command} autoComplete={'off'} />
         <input type={'submit'} value={'>'} />
       </form>
     </div>)
