@@ -2,7 +2,8 @@ class Room
   include DslBase
 
   attributes :name,
-             :description
+             :description,
+             :npcs #todo this should be a proper list container
 
   containers loot_table: LootTable,
              exits: ExitMap

@@ -1,4 +1,4 @@
-require 'stats'
+require_relative './stats'
 
 class Npc
   include DslBase
@@ -16,5 +16,9 @@ class Npc
 
   def post_initialize
     @health = Health.new self
+  end
+
+  def reaction(target)
+    :friendly
   end
 end

@@ -1,3 +1,5 @@
+require_relative '../npcs/manager'
+
 Room.define :SCARY_ROOM do
   name "A Scary Room"
 
@@ -9,4 +11,7 @@ Room.define :SCARY_ROOM do
   exits do
     north THE_FOYER
   end
+
+  # todo containerize
+  npcs [N_MANAGER]
 end
