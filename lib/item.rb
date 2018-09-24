@@ -4,11 +4,11 @@ class Item
   QUALITIES = {
       useless: {
           name: "Useless",
-          color: :gray
+          color: :white
       },
       common: {
           name: "Common",
-          color: :white
+          color: :black
       },
       uncommon: {
           name: "Uncommon",
@@ -20,11 +20,11 @@ class Item
       },
       epic: {
           name: "Epic",
-          color: :purple
+          color: :magenta
       },
       legendary: {
           name: "Legendary",
-          color: :orange
+          color: :yellow
       },
       broken: {
           name: "Broken",
