@@ -9,6 +9,7 @@ gem 'require_all'
 gem 'activesupport'
 gem 'activemodel', require: 'active_model'
 gem 'colorize'
+gem 'em-websocket'
 
 group :development, :test do
   gem 'rspec'

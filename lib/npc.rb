@@ -4,6 +4,18 @@ class Npc
   include DslBase
   include CombatHelper
 
+  REACTIONS = {
+      friendly: {
+          color: :light_green
+      },
+      neutral: {
+          color: :light_yellow
+      },
+      hostile: {
+          color: :light_red
+      }
+  }
+
   attr_reader :health
 
   attributes :name,
@@ -20,5 +32,9 @@ class Npc
 
   def reaction(target)
     :friendly
+  end
+
+  def reaction_color(target)
+    REACTIONS[reaction(target)][:color]
   end
 end
