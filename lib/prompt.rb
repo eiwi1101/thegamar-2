@@ -26,7 +26,11 @@ class Prompt
   end
 
   def print
-    puts @narrate.colorize(:white)
+    if @narrate =~ /\x1b/
+      puts @narrate
+    else
+      puts @narrate.colorize(:white)
+    end
 
     if (subtle = @metadata[:subtle])
       @metadata[:additional] ||= []
