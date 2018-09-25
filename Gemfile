@@ -16,4 +16,5 @@ group :development, :test do
   gem 'rspec-its'
   gem 'rspec_junit_formatter'
   gem 'shoulda-matchers'
+  gem 'capistrano', '~> 3.11', require: false
 end
