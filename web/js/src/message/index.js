@@ -57,10 +57,13 @@ class Message extends Component {
     const {
       title,
       message,
-      additional = [],
       hash,
       table
     } = this.props
+
+    let additional = this.props.additional || []
+
+    if(!additional.map) additional = [additional]
 
     return (<div className='input-message' key={this.props.id}>
       <Ansi className='title'>{title}</Ansi>
