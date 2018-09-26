@@ -17,4 +17,6 @@ group :development, :test do
   gem 'rspec_junit_formatter'
   gem 'shoulda-matchers'
   gem 'capistrano', '~> 3.11', require: false
+  gem 'capistrano-npm'
+  gem 'capistrano-procfile'
 end
