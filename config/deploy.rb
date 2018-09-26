@@ -42,6 +42,9 @@ set :procfile_options, {
     log_dir: File.join(release_path, "log"),
     base_port: 5000,
     app_name: fetch(:application),
-    user: nil,
+    user: 'root',
     formation: "all=1"
 }
+
+
+set :npm_flags, '--production --silent --noprogress --unsafe-perm'
