@@ -6,8 +6,8 @@ const setupSocket = (dispatch, username) => {
 
   socket.onopen = () => {
     socket.send(JSON.stringify({
-      type: types.ADD_USER,
-      name: username
+      type: 'COMMAND',
+      command: "look"
     }))
   }
 
@@ -22,10 +22,13 @@ const setupSocket = (dispatch, username) => {
         dispatch(addCritical(data.message))
         break
       case types.PROMPT:
-        dispatch(addPrompt(data.message))
+        dispatch(addPrompt(data.data))
         break
+      case 'SERVER':
+        console.log("SERVER:", data)
+        break;
       default:
-        dispatch(addError(`Unhandled: ${JSON.stringify(data)}`))
+        console.error(`Unhandled: ${JSON.stringify(data)}`)
         break
     }
   }

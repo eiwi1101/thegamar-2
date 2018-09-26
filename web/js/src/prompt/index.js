@@ -1,4 +1,6 @@
 import React, { Component } from 'react'
+import {addInput} from '../actions'
+import {connect} from 'react-redux'
 
 class Prompt extends Component {
 
@@ -20,7 +22,9 @@ class Prompt extends Component {
 
   handleSubmit(e) {
     e.preventDefault()
-    this.props.socket.send(JSON.stringify({type: 'COMMAND', command: this.state.command}))
+    const command = this.state.command
+    this.props.onInput(command)
+    this.props.socket.send(JSON.stringify({type: 'COMMAND', command: command}))
     this.setState({command: ''})
   }
 
@@ -34,4 +38,18 @@ class Prompt extends Component {
   }
 }
 
-export default Prompt
+const mapStateToProps = (state) => {
+  return {
+    state
+  }
+}
+
+const mapDispatchToProps = (dispatch) => {
+  return {
+    onInput: (input) => {
+      dispatch(addInput(input))
+    }
+  }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(Prompt)

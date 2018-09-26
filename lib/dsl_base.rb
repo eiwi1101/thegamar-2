@@ -178,6 +178,20 @@ module DslBase
     end
   end
 
+  def as_json(options={})
+    json = {}
+
+    @attributes&.keys&.each do |name|
+      json.merge!(name => self.send(name).as_json(shallow: true))
+    end
+
+    @containers&.keys&.each do |name|
+      json.merge!(name => self.send(name).as_json(shallow: true))
+    end unless options[:shallow]
+
+    json
+  end
+
   private
 
   def _process_attribute(attr)

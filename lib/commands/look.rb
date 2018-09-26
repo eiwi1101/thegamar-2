@@ -12,16 +12,16 @@ Command.define :C_LOOK do
       raise "You are not in any room!"
     end
 
-    additional = [
-        current_room.description
-    ]
+    additional = []
 
     current_room.npcs&.each do |npc|
       color = npc.reaction_color(player)
       additional.push "#{npc.name} is here.".colorize(color)
     end
 
-    Prompt.new current_room.name.colorize(:black),
-               additional: additional
+    Prompt.new title: current_room.name.colorize(:black),
+               message: current_room.description,
+               additional: additional,
+               metadata: current_room.as_json
   end
 end

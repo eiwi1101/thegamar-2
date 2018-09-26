@@ -4,36 +4,19 @@ const commands = (state = [], action) => {
   switch (action.type) {
     case 'PROMPT':
       return state.concat([
-        {
-          type: 'PROMPT',
-          id: action.id,
-          message: action.message,
-          metadata: action.metadata
-        }
+        action
       ])
     case 'INPUT':
       return state.concat([
-        {
-          type: 'INPUT',
-          id: action.id,
-          command: action.command
-        }
+        action
       ])
     case 'ERROR':
       return state.concat([
-        {
-          type: 'ERROR',
-          id: action.id,
-          message: action.message
-        }
+        action
       ])
     case 'CRITICAL':
       return state.concat([
-        {
-          type: 'CRITICAL',
-          id: action.id,
-          message: action.message
-        }
+        action
       ])
     default:
       return state

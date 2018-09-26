@@ -11,7 +11,7 @@ EM.run do
       player = Player.new name: "Repl"
 
       player.on_prompt do |prompt|
-        message = { type: 'PROMPT', message: prompt }
+        message = { type: 'PROMPT', data: prompt }
         ws.send message.to_json
       end
 

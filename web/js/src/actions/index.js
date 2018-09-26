@@ -5,8 +5,7 @@ let nextMessageId = 0
 export const addPrompt = (message) => ({
   type: types.PROMPT,
   id: nextMessageId++,
-  message: message.narrate,
-  metadata: message.metadata
+  ...message
 })
 
 export const addError = (message) => ({

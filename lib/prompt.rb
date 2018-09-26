@@ -20,16 +20,27 @@ class Prompt
     "[#{data.join(" - ")}]\n%{prompt} " % objects
   end
 
-  def initialize(narrate, metadata = {})
-    @narrate = narrate
+  def initialize(message_or_metadata, metadata = {})
+    if message_or_metadata.is_a? Hash
+      metadata = message_or_metadata.merge(metadata)
+      message = metadata[:message]
+    else
+      message = message_or_metadata
+    end
+
+    @message = message
     @metadata = metadata
   end
 
   def print
-    if @narrate =~ /\x1b/
-      puts @narrate
+    if (title = @metadata[:title])
+      puts title.colorize(:black)
+    end
+
+    if @message =~ /\x1b/
+      puts @message
     else
-      puts @narrate.colorize(:white)
+      puts @message.colorize(:white)
     end
 
     if (subtle = @metadata[:subtle])
@@ -46,6 +57,17 @@ class Prompt
 
     _print_table @metadata[:table] if @metadata[:table]
     _print_hash @metadata[:hash] if @metadata[:hash]
+
+    if ENV['DEBUG']
+      puts
+      puts @metadata[:metadata].to_json.colorize(:light_black)
+    end
+  end
+
+  def as_json(options={})
+    data = {
+        message: @message
+    }.merge(@metadata)
   end
 
   private
