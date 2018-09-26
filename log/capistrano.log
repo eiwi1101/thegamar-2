@@ -1182,3 +1182,189 @@
   /var/lib/gems/2.5.0/gems/bundler-1.16.5/lib/bundler/rubygems_integration.rb:462:in `block in replace_bin_path'
   /var/lib/gems/2.5.0/gems/bundler-1.16.5/lib/bundler/rubygems_integration.rb:482:in `block in replace_bin_path'
   /usr/local/bin/foreman:23:in `<top (required)>'
+  INFO ---------------------------------------------------------------------------
+  INFO START 2018-09-25 18:20:33 -0700 cap production deploy
+  INFO ---------------------------------------------------------------------------
+  INFO [4bb8d1ba] Running /usr/bin/env mkdir -p /tmp as root@45.63.69.121
+ DEBUG [4bb8d1ba] Command: /usr/bin/env mkdir -p /tmp
+  INFO [fc713fbd] Finished in 1.506 seconds with exit status 0 (successful).
+ DEBUG Uploading /tmp/git-ssh-thegamar-aio-production-weisert.sh 0.0%
+  INFO Uploading /tmp/git-ssh-thegamar-aio-production-weisert.sh 100.0%
+  INFO [2c0df534] Running /usr/bin/env chmod 700 /tmp/git-ssh-thegamar-aio-production-weisert.sh as root@45.63.69.121
+ DEBUG [2c0df534] Command: /usr/bin/env chmod 700 /tmp/git-ssh-thegamar-aio-production-weisert.sh
+  INFO [e02d29e3] Finished in 0.096 seconds with exit status 0 (successful).
+  INFO [5e0c6830] Running /usr/bin/env git ls-remote git@github.com:eiwi1101/thegamar-2 HEAD as root@45.63.69.121
+ DEBUG [5e0c6830] Command: ( export GIT_ASKPASS="/bin/echo" GIT_SSH="/tmp/git-ssh-thegamar-aio-production-weisert.sh" ; /usr/bin/env git ls-remote git@github.com:eiwi1101/thegamar-2 HEAD )
+ DEBUG [6daf8ada] 	ae80f196a63e69d85f45abd377c887dbe8906130	HEAD
+  INFO [6daf8ada] Finished in 0.610 seconds with exit status 0 (successful).
+  INFO [4c62a66b] Running /usr/bin/env mkdir -p /var/app/shared /var/app/releases as root@45.63.69.121
+ DEBUG [4c62a66b] Command: /usr/bin/env mkdir -p /var/app/shared /var/app/releases
+  INFO [2bf83a0d] Finished in 0.068 seconds with exit status 0 (successful).
+  INFO [af63985b] Running /usr/bin/env mkdir -p /var/app/shared/log /var/app/shared/tmp /var/app/shared/node_modules /var/app/shared/web/js/node_modules /var/app/shared/vendor/bundle as root@45.63.69.121
+ DEBUG [af63985b] Command: /usr/bin/env mkdir -p /var/app/shared/log /var/app/shared/tmp /var/app/shared/node_modules /var/app/shared/web/js/node_modules /var/app/shared/vendor/bundle
+  INFO [5d12a03e] Finished in 0.095 seconds with exit status 0 (successful).
+ DEBUG [a8466eaa] Running [ -f /var/app/current/REVISION ] as root@45.63.69.121
+ DEBUG [a8466eaa] Command: [ -f /var/app/current/REVISION ]
+ DEBUG [86d5f3fd] Finished in 0.097 seconds with exit status 0 (successful).
+ DEBUG [e7f73140] Running /usr/bin/env cat /var/app/current/REVISION 2>/dev/null as root@45.63.69.121
+ DEBUG [e7f73140] Command: /usr/bin/env cat /var/app/current/REVISION 2>/dev/null
+ DEBUG [2e7af465] 	a09fc1de70b00e671ec1b94b6cf2b6673202156d
+ DEBUG [2e7af465] Finished in 0.093 seconds with exit status 0 (successful).
+ DEBUG [e00e75a3] Running [ -f /var/app/repo/HEAD ] as root@45.63.69.121
+ DEBUG [e00e75a3] Command: [ -f /var/app/repo/HEAD ]
+ DEBUG [ea5bd218] Finished in 0.098 seconds with exit status 0 (successful).
+  INFO The repository mirror is at /var/app/repo
+ DEBUG [14d49564] Running if test ! -d /var/app/repo; then echo "Directory does not exist '/var/app/repo'" 1>&2; false; fi as root@45.63.69.121
+ DEBUG [14d49564] Command: if test ! -d /var/app/repo; then echo "Directory does not exist '/var/app/repo'" 1>&2; false; fi
+ DEBUG [52ecda13] Finished in 0.093 seconds with exit status 0 (successful).
+  INFO [faf5ac99] Running /usr/bin/env git remote set-url origin git@github.com:eiwi1101/thegamar-2 as root@45.63.69.121
+ DEBUG [faf5ac99] Command: cd /var/app/repo && ( export GIT_ASKPASS="/bin/echo" GIT_SSH="/tmp/git-ssh-thegamar-aio-production-weisert.sh" ; /usr/bin/env git remote set-url origin git@github.com:eiwi1101/thegamar-2 )
+  INFO [1a857a75] Finished in 0.104 seconds with exit status 0 (successful).
+  INFO [86843998] Running /usr/bin/env git remote update --prune as root@45.63.69.121
+ DEBUG [86843998] Command: cd /var/app/repo && ( export GIT_ASKPASS="/bin/echo" GIT_SSH="/tmp/git-ssh-thegamar-aio-production-weisert.sh" ; /usr/bin/env git remote update --prune )
+ DEBUG [b800e9b1] 	Fetching origin
+ DEBUG [b800e9b1] 	From github.com:eiwi1101/thegamar-2
+   a09fc1d..ae80f19  master     -> master
+  INFO [b800e9b1] Finished in 0.739 seconds with exit status 0 (successful).
+ DEBUG [902d9c4a] Running if test ! -d /var/app/repo; then echo "Directory does not exist '/var/app/repo'" 1>&2; false; fi as root@45.63.69.121
+ DEBUG [902d9c4a] Command: if test ! -d /var/app/repo; then echo "Directory does not exist '/var/app/repo'" 1>&2; false; fi
+ DEBUG [586d687c] Finished in 0.097 seconds with exit status 0 (successful).
+  INFO [e4de5c19] Running /usr/bin/env mkdir -p /var/app/releases/20180926012035 as root@45.63.69.121
+ DEBUG [e4de5c19] Command: cd /var/app/repo && ( export GIT_ASKPASS="/bin/echo" GIT_SSH="/tmp/git-ssh-thegamar-aio-production-weisert.sh" ; /usr/bin/env mkdir -p /var/app/releases/20180926012035 )
+  INFO [2814ea84] Finished in 0.104 seconds with exit status 0 (successful).
+  INFO [fb5af39a] Running /usr/bin/env git archive master | /usr/bin/env tar -x -f - -C /var/app/releases/20180926012035 as root@45.63.69.121
+ DEBUG [fb5af39a] Command: cd /var/app/repo && ( export GIT_ASKPASS="/bin/echo" GIT_SSH="/tmp/git-ssh-thegamar-aio-production-weisert.sh" ; /usr/bin/env git archive master | /usr/bin/env tar -x -f - -C /var/app/releases/20180926012035 )
+  INFO [19a13991] Finished in 0.130 seconds with exit status 0 (successful).
+ DEBUG [adddcb6a] Running if test ! -d /var/app/repo; then echo "Directory does not exist '/var/app/repo'" 1>&2; false; fi as root@45.63.69.121
+ DEBUG [adddcb6a] Command: if test ! -d /var/app/repo; then echo "Directory does not exist '/var/app/repo'" 1>&2; false; fi
+ DEBUG [95fc49fc] Finished in 0.096 seconds with exit status 0 (successful).
+ DEBUG [41d7ce98] Running /usr/bin/env git rev-list --max-count=1 master as root@45.63.69.121
+ DEBUG [41d7ce98] Command: cd /var/app/repo && ( export GIT_ASKPASS="/bin/echo" GIT_SSH="/tmp/git-ssh-thegamar-aio-production-weisert.sh" ; /usr/bin/env git rev-list --max-count=1 master )
+ DEBUG [921ffbbf] 	ae80f196a63e69d85f45abd377c887dbe8906130
+ DEBUG [921ffbbf] Finished in 0.109 seconds with exit status 0 (successful).
+ DEBUG [98bc09e1] Running if test ! -d /var/app/releases/20180926012035; then echo "Directory does not exist '/var/app/releases/20180926012035'" 1>&2; false; fi as root@45.63.69.121
+ DEBUG [98bc09e1] Command: if test ! -d /var/app/releases/20180926012035; then echo "Directory does not exist '/var/app/releases/20180926012035'" 1>&2; false; fi
+ DEBUG [d6fa2506] Finished in 0.101 seconds with exit status 0 (successful).
+  INFO [9bb3040e] Running /usr/bin/env echo "ae80f196a63e69d85f45abd377c887dbe8906130" > REVISION as root@45.63.69.121
+ DEBUG [9bb3040e] Command: cd /var/app/releases/20180926012035 && /usr/bin/env echo "ae80f196a63e69d85f45abd377c887dbe8906130" > REVISION
+  INFO [3a6420ca] Finished in 0.106 seconds with exit status 0 (successful).
+  INFO [33ab87d5] Running /usr/bin/env mkdir -p /var/app/releases/20180926012035 /var/app/releases/20180926012035/web/js /var/app/releases/20180926012035/vendor as root@45.63.69.121
+ DEBUG [33ab87d5] Command: /usr/bin/env mkdir -p /var/app/releases/20180926012035 /var/app/releases/20180926012035/web/js /var/app/releases/20180926012035/vendor
+  INFO [ae36ae35] Finished in 0.099 seconds with exit status 0 (successful).
+ DEBUG [e1a3c17b] Running [ -L /var/app/releases/20180926012035/log ] as root@45.63.69.121
+ DEBUG [e1a3c17b] Command: [ -L /var/app/releases/20180926012035/log ]
+ DEBUG [d518b63f] Finished in 0.091 seconds with exit status 1 (failed).
+ DEBUG [16dea513] Running [ -d /var/app/releases/20180926012035/log ] as root@45.63.69.121
+ DEBUG [16dea513] Command: [ -d /var/app/releases/20180926012035/log ]
+ DEBUG [c6aa7bff] Finished in 0.108 seconds with exit status 0 (successful).
+  INFO [60842c89] Running /usr/bin/env rm -rf /var/app/releases/20180926012035/log as root@45.63.69.121
+ DEBUG [60842c89] Command: /usr/bin/env rm -rf /var/app/releases/20180926012035/log
+  INFO [41d69086] Finished in 0.094 seconds with exit status 0 (successful).
+  INFO [555b38c9] Running /usr/bin/env ln -s /var/app/shared/log /var/app/releases/20180926012035/log as root@45.63.69.121
+ DEBUG [555b38c9] Command: /usr/bin/env ln -s /var/app/shared/log /var/app/releases/20180926012035/log
+  INFO [9b930b61] Finished in 0.103 seconds with exit status 0 (successful).
+ DEBUG [6aa2ec87] Running [ -L /var/app/releases/20180926012035/tmp ] as root@45.63.69.121
+ DEBUG [6aa2ec87] Command: [ -L /var/app/releases/20180926012035/tmp ]
+ DEBUG [c2aa1e56] Finished in 0.108 seconds with exit status 1 (failed).
+ DEBUG [f327bd55] Running [ -d /var/app/releases/20180926012035/tmp ] as root@45.63.69.121
+ DEBUG [f327bd55] Command: [ -d /var/app/releases/20180926012035/tmp ]
+ DEBUG [f6c3176c] Finished in 0.093 seconds with exit status 0 (successful).
+  INFO [f239bae6] Running /usr/bin/env rm -rf /var/app/releases/20180926012035/tmp as root@45.63.69.121
+ DEBUG [f239bae6] Command: /usr/bin/env rm -rf /var/app/releases/20180926012035/tmp
+  INFO [c446c625] Finished in 0.104 seconds with exit status 0 (successful).
+  INFO [f62f308a] Running /usr/bin/env ln -s /var/app/shared/tmp /var/app/releases/20180926012035/tmp as root@45.63.69.121
+ DEBUG [f62f308a] Command: /usr/bin/env ln -s /var/app/shared/tmp /var/app/releases/20180926012035/tmp
+  INFO [c6ab67dd] Finished in 0.099 seconds with exit status 0 (successful).
+ DEBUG [883cbb47] Running [ -L /var/app/releases/20180926012035/node_modules ] as root@45.63.69.121
+ DEBUG [883cbb47] Command: [ -L /var/app/releases/20180926012035/node_modules ]
+ DEBUG [9731d704] Finished in 0.097 seconds with exit status 1 (failed).
+ DEBUG [5b4080db] Running [ -d /var/app/releases/20180926012035/node_modules ] as root@45.63.69.121
+ DEBUG [5b4080db] Command: [ -d /var/app/releases/20180926012035/node_modules ]
+ DEBUG [c9f30ebd] Finished in 0.100 seconds with exit status 1 (failed).
+  INFO [8102c649] Running /usr/bin/env ln -s /var/app/shared/node_modules /var/app/releases/20180926012035/node_modules as root@45.63.69.121
+ DEBUG [8102c649] Command: /usr/bin/env ln -s /var/app/shared/node_modules /var/app/releases/20180926012035/node_modules
+  INFO [9e548103] Finished in 0.094 seconds with exit status 0 (successful).
+ DEBUG [80b15cf8] Running [ -L /var/app/releases/20180926012035/web/js/node_modules ] as root@45.63.69.121
+ DEBUG [80b15cf8] Command: [ -L /var/app/releases/20180926012035/web/js/node_modules ]
+ DEBUG [cfc2c3e6] Finished in 0.101 seconds with exit status 1 (failed).
+ DEBUG [889bf8a7] Running [ -d /var/app/releases/20180926012035/web/js/node_modules ] as root@45.63.69.121
+ DEBUG [889bf8a7] Command: [ -d /var/app/releases/20180926012035/web/js/node_modules ]
+ DEBUG [91e2c627] Finished in 0.091 seconds with exit status 1 (failed).
+  INFO [fd486686] Running /usr/bin/env ln -s /var/app/shared/web/js/node_modules /var/app/releases/20180926012035/web/js/node_modules as root@45.63.69.121
+ DEBUG [fd486686] Command: /usr/bin/env ln -s /var/app/shared/web/js/node_modules /var/app/releases/20180926012035/web/js/node_modules
+  INFO [851fd624] Finished in 0.094 seconds with exit status 0 (successful).
+ DEBUG [ce63a1c4] Running [ -L /var/app/releases/20180926012035/vendor/bundle ] as root@45.63.69.121
+ DEBUG [ce63a1c4] Command: [ -L /var/app/releases/20180926012035/vendor/bundle ]
+ DEBUG [7864a678] Finished in 0.094 seconds with exit status 1 (failed).
+ DEBUG [4224ab1c] Running [ -d /var/app/releases/20180926012035/vendor/bundle ] as root@45.63.69.121
+ DEBUG [4224ab1c] Command: [ -d /var/app/releases/20180926012035/vendor/bundle ]
+ DEBUG [263b0537] Finished in 0.103 seconds with exit status 1 (failed).
+  INFO [b1b23fda] Running /usr/bin/env ln -s /var/app/shared/vendor/bundle /var/app/releases/20180926012035/vendor/bundle as root@45.63.69.121
+ DEBUG [b1b23fda] Command: /usr/bin/env ln -s /var/app/shared/vendor/bundle /var/app/releases/20180926012035/vendor/bundle
+  INFO [9221da93] Finished in 0.109 seconds with exit status 0 (successful).
+ DEBUG [8ff6a836] Running if test ! -d /var/app/releases/20180926012035; then echo "Directory does not exist '/var/app/releases/20180926012035'" 1>&2; false; fi as root@45.63.69.121
+ DEBUG [8ff6a836] Command: if test ! -d /var/app/releases/20180926012035; then echo "Directory does not exist '/var/app/releases/20180926012035'" 1>&2; false; fi
+ DEBUG [a116cd94] Finished in 0.094 seconds with exit status 0 (successful).
+ DEBUG [87f973b2] Running /usr/bin/env bundle check --path /var/app/shared/bundle as root@45.63.69.121
+ DEBUG [87f973b2] Command: cd /var/app/releases/20180926012035 && /usr/bin/env bundle check --path /var/app/shared/bundle
+ DEBUG [72ca6993] 	The following gems are missing
+ DEBUG [72ca6993] 	 * rake (12.3.1)
+ DEBUG [72ca6993] 	 * concurrent-ruby (1.0.5)
+ DEBUG [72ca6993] 	 * i18n (1.0.1)
+ DEBUG [72ca6993] 	 * minitest (5.11.3)
+ DEBUG [72ca6993] 	 * thread_safe (0.3.6)
+ DEBUG [72ca6993] 	 * tzinfo (1.2.5)
+ DEBUG [72ca6993] 	 * activesupport (5.2.0)
+ DEBUG [72ca6993] 	 * activemodel (5.2.0)
+ DEBUG [72ca6993] 	 * net-ssh (5.0.2)
+ DEBUG [72ca6993] 	 * net-scp (1.2.1)
+ DEBUG [72ca6993] 	 * sshkit (1.17.0)
+ DEBUG [72ca6993] 	 * airbrussh (1.3.0)
+ DEBUG [72ca6993] 	 * builder (3.2.2)
+ DEBUG [72ca6993] 	 * capistrano (3.11.0)
+ DEBUG [72ca6993] 	 * capistrano-npm (1.0.2)
+ DEBUG [72ca6993] 	 * capistrano-procfile (0.1.2)
+ DEBUG [72ca6993] 	 * colorize (0.8.1)
+ DEBUG [72ca6993] 	 * diff-lcs (1.3)
+ DEBUG [72ca6993] 	 * eventmachine (1.2.7)
+ DEBUG [72ca6993] 	 * http_parser.rb (0.6.0)
+ DEBUG [72ca6993] 	 * em-websocket (0.5.1)
+ DEBUG [72ca6993] 	 * require_all (2.0.0)
+ DEBUG [72ca6993] 	 * rspec-support (3.7.1)
+ DEBUG [72ca6993] 	 * rspec-core (3.7.1)
+ DEBUG [72ca6993] 	 * rspec-expectations (3.7.0)
+ DEBUG [72ca6993] 	 * rspec-mocks (3.7.0)
+ DEBUG [72ca6993] 	 * rspec (3.7.0)
+ DEBUG [72ca6993] 	 * rspec-its (1.2.0)
+ DEBUG [72ca6993] 	 * rspec_junit_formatter (0.2.3)
+ DEBUG [72ca6993] 	 * shoulda-matchers (3.1.2)
+ DEBUG [72ca6993] 	Install missing gems with `bundle install`
+ DEBUG [72ca6993] Finished in 0.630 seconds with exit status 1 (failed).
+  INFO [afd5b1d3] Running /usr/bin/env bundle install --path /var/app/shared/bundle --without development test --deployment --quiet as root@45.63.69.121
+ DEBUG [afd5b1d3] Command: cd /var/app/releases/20180926012035 && /usr/bin/env bundle install --path /var/app/shared/bundle --without development test --deployment --quiet
+  INFO [50b2960e] Finished in 28.928 seconds with exit status 0 (successful).
+ DEBUG [94125336] Running if test ! -d /var/app/releases/20180926012035; then echo "Directory does not exist '/var/app/releases/20180926012035'" 1>&2; false; fi as root@45.63.69.121
+ DEBUG [94125336] Command: if test ! -d /var/app/releases/20180926012035; then echo "Directory does not exist '/var/app/releases/20180926012035'" 1>&2; false; fi
+ DEBUG [0d166985] Finished in 0.115 seconds with exit status 0 (successful).
+  INFO [a5301b38] Running /usr/bin/env npm install --production --silent --no-progress as root@45.63.69.121
+ DEBUG [a5301b38] Command: cd /var/app/releases/20180926012035 && /usr/bin/env npm install --production --silent --no-progress
+  INFO [926effbb] Finished in 2.146 seconds with exit status 0 (successful).
+  INFO [ccae80fc] Running /usr/bin/env ln -s /var/app/releases/20180926012035 /var/app/releases/current as root@45.63.69.121
+ DEBUG [ccae80fc] Command: /usr/bin/env ln -s /var/app/releases/20180926012035 /var/app/releases/current
+  INFO [c12078f7] Finished in 0.099 seconds with exit status 0 (successful).
+  INFO [abae021c] Running /usr/bin/env mv /var/app/releases/current /var/app as root@45.63.69.121
+ DEBUG [abae021c] Command: /usr/bin/env mv /var/app/releases/current /var/app
+  INFO [9d944268] Finished in 0.104 seconds with exit status 0 (successful).
+  INFO [e78bb316] Running /usr/bin/env mkdir -p /var/app/current/log as root@45.63.69.121
+ DEBUG [e78bb316] Command: /usr/bin/env mkdir -p /var/app/current/log
+  INFO [28dfc9fe] Finished in 0.092 seconds with exit status 0 (successful).
+ DEBUG [d3f8ebd2] Running if test ! -d /var/app/releases/20180926012035; then echo "Directory does not exist '/var/app/releases/20180926012035'" 1>&2; false; fi as root@45.63.69.121
+ DEBUG [d3f8ebd2] Command: if test ! -d /var/app/releases/20180926012035; then echo "Directory does not exist '/var/app/releases/20180926012035'" 1>&2; false; fi
+ DEBUG [1af80e2e] Finished in 0.101 seconds with exit status 0 (successful).
+  INFO [0f08c33d] Running /usr/bin/env bundle exec foreman export systemd /etc/systemd/system -d /var/app/current -l /var/app/current/log -p 5000 -a thegamar-aio -m all=1 as root@45.63.69.121
+ DEBUG [0f08c33d] Command: cd /var/app/releases/20180926012035 && /usr/bin/env bundle exec foreman export systemd /etc/systemd/system -d /var/app/current -l /var/app/current/log -p 5000 -a thegamar-aio -m all=1
+ DEBUG [993db14b] 	bundler: failed to load command: foreman (/usr/local/bin/foreman)
+ DEBUG [993db14b] 	Gem::Exception: can't find executable foreman for gem foreman. foreman is not currently included in the bundle, perhaps you meant to add it to your Gemfile?
+  /var/lib/gems/2.5.0/gems/bundler-1.16.5/lib/bundler/rubygems_integration.rb:462:in `block in replace_bin_path'
+  /var/lib/gems/2.5.0/gems/bundler-1.16.5/lib/bundler/rubygems_integration.rb:482:in `block in replace_bin_path'
+  /usr/local/bin/foreman:23:in `<top (required)>'

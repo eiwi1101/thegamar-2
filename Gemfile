@@ -10,6 +10,7 @@ gem 'activesupport'
 gem 'activemodel', require: 'active_model'
 gem 'colorize'
 gem 'em-websocket'
+gem 'foreman'
 
 group :development, :test do
   gem 'rspec'
@@ -19,4 +20,5 @@ group :development, :test do
   gem 'capistrano', '~> 3.11', require: false
   gem 'capistrano-npm'
   gem 'capistrano-procfile'
+  gem 'capistrano-bundler'
 end
