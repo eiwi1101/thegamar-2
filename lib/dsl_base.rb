@@ -196,7 +196,11 @@ module DslBase
 
   def _process_attribute(attr)
     if attr.is_a? String
-      attr.squish
+      attr
+          .gsub(/\A\s+|\s+\z/, '')
+          .gsub(/(\n\s*){2,}/, '<br/>')
+          .gsub(/\s+/, ' ')
+          .gsub(/<br\/>/, "\n\n")
     else
       attr
     end
