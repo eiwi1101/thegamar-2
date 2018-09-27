@@ -9,7 +9,7 @@ class Message extends Component {
       const ansi_up = new AnsiUp()
       ansi_up.use_classes = true
 
-      const html = ansi_up.ansi_to_html(children).replace(/\n/, '<br/>')
+      const html = ansi_up.ansi_to_html(children).replace(/\n/g, '<br/>')
 
       return (<div style={style} dangerouslySetInnerHTML={{__html: html}} /> )
     }
